@@ -11,12 +11,23 @@ public class GameManager : MonoBehaviour
         Market2,
         Market3,
         Market4,
-        Market5
+        Market5,
+        Menu
     }
 
+    private GameState currentState;
+    public GameObject player;
+    private Player playerScript;
+
+    public GameObject zebra_NPC;
+
+    // Visual
+    public Camera[] cameras;
+    private int currentCameraIndex;
     void Start()
     {
-        
+        currentState = GameState.FreeRoam;
+        playerScript = player.GetComponent<Player>();
     }
 
     void Update()
