@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Fields
+    /// <summary>
+    /// Game States
+    /// </summary>
     enum GameState
     {
         Menu,
@@ -16,17 +20,15 @@ public class GameManager : MonoBehaviour
         Market5,
         PauseMenu
     }
-
     private GameState currentState;
     private GameState previousState;
-    public GameObject npcs;
+    // Players
     public GameObject player;
     private Player playerScript;
-
-    public NPC zebra_NPC;
-    public NPC owl_NPC;
-
-    public Camera camera;
+    // NPCs
+    public GameObject npcVisability;
+    public NPC[] npcs;
+    // UI
     public GameObject pauseMenuUI;
     void Start()
     {
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         player.SetActive(true);
         pauseMenuUI.SetActive(false);
-        npcs.SetActive(true);
+        npcVisability.SetActive(true);
     }
 
     void Update()
@@ -48,10 +50,11 @@ public class GameManager : MonoBehaviour
                 previousState = GameState.FreeRoam;
                 // Update objects
                 player.SetActive(true); 
-                updateCamera(player.transform.position);
                 // Update Dialogue
-                detectNPCDialogue(playerScript, zebra_NPC);
-                detectNPCDialogue(playerScript, owl_NPC);
+                for(int i = 0; i < npcs.Length; i++)
+                {
+                    detectNPCDialogue(playerScript, npcs[i]);
+                }
                 // Menu
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
@@ -112,13 +115,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void updateCamera(Vector3 playerPos)
-    {
-        Vector3 cameraPos = new Vector3(playerPos.x, playerPos.y, -2);
-        camera.transform.position = cameraPos;
-    }
-
-
     // -------- Event Handelers / Methods -------- //
     void PauseGame()
     {
@@ -146,10 +142,11 @@ public class GameManager : MonoBehaviour
     private void detectNPCDialogue(Player player, NPC npc)
     {
         Vector3 playerPosition = player.transform.position;
-        if (playerPosition.x > (npc.pos.x - 5) &&
-            playerPosition.x < (npc.pos.x + 5) &&
-            playerPosition.y > (npc.pos.y - 5) &&
-            playerPosition.y < (npc.pos.y + 5))
+        Vector3 npcPosition = npc.transform.position;
+        if (playerPosition.x > (npcPosition.x - 5) &&
+            playerPosition.x < (npcPosition.x + 5) &&
+            playerPosition.y > (npcPosition.y - 5) &&
+            playerPosition.y < (npcPosition.y + 5))
         {
             if (!npc.dialogueBubble.activeSelf)
             {

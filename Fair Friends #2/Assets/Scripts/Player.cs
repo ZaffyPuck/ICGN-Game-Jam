@@ -7,17 +7,14 @@ public class Player : MonoBehaviour
     private float x, y;
     private const float z = -1;
     private Vector3 pos; // Prob don't need
-    private const float speed = .2f;
+    private const float speed = .15f;
     public SpriteRenderer spriteRenderer;
     public Sprite forward;
     public Sprite backwards;
 
     void Start()
     {
-        x = 0;
-        y = 0;
-        pos = new Vector3(x, y, z);
-        transform.position = pos;
+        pos = transform.position;
         spriteRenderer.sprite = forward;
     }
 

@@ -6,7 +6,6 @@ using TMPro;
 public class NPC : MonoBehaviour
 {
     public string name;
-    public Vector3 pos;
     public Player player;
     private Vector3 playerPosition;
     public TextMeshPro nameText;
@@ -17,8 +16,6 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = pos;
-
         playerPosition = player.transform.position;
         dialogueBubble.SetActive(false);
     }
