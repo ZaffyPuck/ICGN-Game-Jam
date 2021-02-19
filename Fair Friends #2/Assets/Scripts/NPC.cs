@@ -19,10 +19,4 @@ public class NPC : MonoBehaviour
         playerPosition = player.transform.position;
         dialogueBubble.SetActive(false);
     }
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-
 }
