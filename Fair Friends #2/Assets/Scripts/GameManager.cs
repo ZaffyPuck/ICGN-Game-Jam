@@ -19,10 +19,13 @@ public class GameManager : MonoBehaviour
 
     private GameState currentState;
     private GameState previousState;
+    public GameObject npcs;
     public GameObject player;
     private Player playerScript;
 
-    public GameObject zebra_NPC;
+    public NPC zebra_NPC;
+    public NPC owl_NPC;
+
     public Camera camera;
     public GameObject pauseMenuUI;
     void Start()
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         player.SetActive(true);
         pauseMenuUI.SetActive(false);
+        npcs.SetActive(true);
     }
 
     void Update()
@@ -45,6 +49,9 @@ public class GameManager : MonoBehaviour
                 // Update objects
                 player.SetActive(true); 
                 updateCamera(player.transform.position);
+                // Update Dialogue
+                detectNPCDialogue(playerScript, zebra_NPC);
+                detectNPCDialogue(playerScript, owl_NPC);
                 // Menu
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
@@ -136,4 +143,23 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    private void detectNPCDialogue(Player player, NPC npc)
+    {
+        Vector3 playerPosition = player.transform.position;
+        if (playerPosition.x > (npc.pos.x - 5) &&
+            playerPosition.x < (npc.pos.x + 5) &&
+            playerPosition.y > (npc.pos.y - 5) &&
+            playerPosition.y < (npc.pos.y + 5))
+        {
+            if (!npc.dialogueBubble.activeSelf)
+            {
+                npc.dialogueBubble.SetActive(true);
+                FindObjectOfType<DialogueManager>().StartDialogue(npc);
+            }
+        }
+        else
+        {
+            npc.dialogueBubble.SetActive(false);
+        }
+    }
 }
