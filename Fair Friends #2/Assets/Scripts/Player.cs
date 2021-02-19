@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     private float x, y;
     private const float z = -1;
-    private Vector3 pos; // Prob don't need
+    public Vector3 pos; // Prob don't need
     private const float speed = .2f;
     public SpriteRenderer spriteRenderer;
     public Sprite forward;
