@@ -14,7 +14,18 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        pos = transform.position;
+        if (GlobalControl.Instance.PlayerPosition == null)
+        {
+            pos = transform.position;
+        }
+        else
+        {
+            // Saves location when going into minigame
+            pos = GlobalControl.Instance.PlayerPosition;
+            x = pos.x;
+            y = pos.y;
+            transform.position = GlobalControl.Instance.PlayerPosition;
+        }
         spriteRenderer.sprite = forward;
     }
 

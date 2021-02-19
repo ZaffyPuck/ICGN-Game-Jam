@@ -5,6 +5,7 @@ using TMPro;
 
 public class MiniGameDialogue : MonoBehaviour
 {
+    // This is basically the NPC script but for miniGames
     public string name;
     public TextMeshPro nameText;
     public TextMeshPro dialogueText;

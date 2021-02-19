@@ -29,7 +29,6 @@ public class DialogueManager : MonoBehaviour
         }
         DisplayNextSentence(npc);
     }
-
     public void DisplayNextSentence(NPC npc)
     {
         if(sentences.Count == 0)
@@ -56,5 +55,44 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue(NPC npc)
     {
         npc.dialogueBubble.SetActive(false);
+    }
+
+    // For MiniGames
+    public void StartDialogue(MiniGameDialogue mgD)
+    {
+        Debug.Log("Starting conversation with " + mgD.name);
+        TextMeshPro nameText = mgD.nameText;
+        TextMeshPro dialogueText = mgD.dialogueText;
+        nameText.text = mgD.name;
+
+        sentences.Clear();
+
+        foreach (string sentence in mgD.dialogue.sentences)
+        {
+            sentences.Enqueue(sentence);
+        }
+        DisplayNextSentence(mgD);
+    }
+    public void DisplayNextSentence(MiniGameDialogue mgD)
+    {
+        if (sentences.Count == 0)
+        {
+            return;
+        }
+
+        string sentence = sentences.Dequeue();
+        //dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence, mgD));
+    }
+    IEnumerator TypeSentence(string sentence, MiniGameDialogue mgD)
+    {
+        WaitForSeconds wait = new WaitForSeconds(1 / 60f);
+        mgD.dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            mgD.dialogueText.text += letter;
+            yield return wait;
+        }
     }
 }

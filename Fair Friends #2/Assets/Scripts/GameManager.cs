@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
             playerPosition.y < (standPosition.y + 5) &&
             Input.GetKeyDown(KeyCode.Return))
         {
+            GlobalControl.Instance.PlayerPosition = playerPosition;
             SceneManager.LoadScene(stand.gameScene);
         }
     }
