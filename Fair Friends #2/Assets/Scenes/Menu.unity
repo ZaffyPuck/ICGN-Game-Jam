@@ -197,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 305538151}
   - component: {fileID: 305538152}
+  - component: {fileID: 305538153}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -239,6 +240,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f894b93d2d2667942b210ffcd8ec6a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &305538153
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305538150}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 955d3f0c479482b4bbba260b8b607dac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &334003177
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +685,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Controls:
 
-    WASD'
+    Movement - WASD
+
+    Interactions - Enter'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -2660,8 +2682,8 @@ Camera:
   m_GameObject: {fileID: 1900569917}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
