@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Fields
+    /// <summary>
+    /// Game States
+    /// </summary>
     enum GameState
     {
         Menu,
@@ -16,14 +20,18 @@ public class GameManager : MonoBehaviour
         Market5,
         PauseMenu
     }
-
     private GameState currentState;
     private GameState previousState;
+    // Players
     public GameObject player;
     private Player playerScript;
-
-    public GameObject zebra_NPC;
-    public Camera camera;
+    // NPCs
+    public GameObject npcVisability;
+    public NPC[] npcs;
+    // Stands
+    public GameObject standVisability;
+    public Stand[] stands;
+    // UI
     public GameObject pauseMenuUI;
     void Start()
     {
@@ -31,6 +39,8 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         player.SetActive(true);
         pauseMenuUI.SetActive(false);
+        npcVisability.SetActive(true);
+        standVisability.SetActive(true);
     }
 
     void Update()
@@ -43,12 +53,20 @@ public class GameManager : MonoBehaviour
             case GameState.FreeRoam:
                 previousState = GameState.FreeRoam;
                 // Update objects
-                player.SetActive(true); 
-                updateCamera(player.transform.position);
+                //player.SetActive(true); 
+                // Update Dialogue
+                for(int i = 0; i < npcs.Length; i++)
+                {
+                    detectNPCDialogue(playerScript, npcs[i]);
+                    if(i < stands.Length)
+                    {
+                        detectStand(playerScript, stands[i]);
+                    }
+                }
                 // Menu
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    player.SetActive(false); //Prevents character from moving/updating in menu
+                    //player.SetActive(false); //Prevents character from moving/updating in menu
                     PauseGame();
                 }
                 // Get to other game modes (markets)
@@ -105,13 +123,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void updateCamera(Vector3 playerPos)
-    {
-        Vector3 cameraPos = new Vector3(playerPos.x, playerPos.y, -2);
-        camera.transform.position = cameraPos;
-    }
-
-
     // -------- Event Handelers / Methods -------- //
     void PauseGame()
     {
@@ -136,4 +147,38 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    private void detectNPCDialogue(Player player, NPC npc)
+    {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 npcPosition = npc.transform.position;
+        if (playerPosition.x > (npcPosition.x - 5) &&
+            playerPosition.x < (npcPosition.x + 5) &&
+            playerPosition.y > (npcPosition.y - 5) &&
+            playerPosition.y < (npcPosition.y + 5))
+        {
+            if (!npc.dialogueBubble.activeSelf)
+            {
+                npc.dialogueBubble.SetActive(true);
+                FindObjectOfType<DialogueManager>().StartDialogue(npc);
+            }
+        }
+        else
+        {
+            npc.dialogueBubble.SetActive(false);
+        }
+    }
+    private void detectStand(Player player, Stand stand)
+    {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 standPosition = stand.transform.position;
+        if (playerPosition.x > (standPosition.x - 5) &&
+            playerPosition.x < (standPosition.x + 5) &&
+            playerPosition.y > (standPosition.y - 5) &&
+            playerPosition.y < (standPosition.y + 5) &&
+            Input.GetKeyDown(KeyCode.Return))
+        {
+            GlobalControl.Instance.PlayerPosition = playerPosition;
+            SceneManager.LoadScene(stand.gameScene);
+        }
+    }
 }
