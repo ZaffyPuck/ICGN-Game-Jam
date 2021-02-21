@@ -2170,6 +2170,7 @@ MonoBehaviour:
   puzzleSprites: []
   buttons: []
   matchSound: {fileID: 1978737675}
+  click: {fileID: 991715289}
 --- !u!114 &1987931134
 MonoBehaviour:
   m_ObjectHideFlags: 0

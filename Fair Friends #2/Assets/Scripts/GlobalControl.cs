@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GlobalControl : MonoBehaviour
 {
@@ -58,9 +59,15 @@ public class GlobalControl : MonoBehaviour
 
     private void Update()
     {
-        if(followers >=3 )
+        // Win Condition
+        if(followers >= 4 )
         {
-            // Make win page active
+            SceneManager.LoadScene("WinScene");
         }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

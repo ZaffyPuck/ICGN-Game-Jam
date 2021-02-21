@@ -3361,6 +3361,7 @@ MonoBehaviour:
     sentences:
     - Hello player! You will be using physical skills in this game.
     - Try and knock all 3 bottles off the table with the ball.
+    - Drag the mouse like a slingshot and you will see the balls trajectory.
     - If the ball rolls away from you or you comitted an epic fail, you can always
       hit the reset button.
 --- !u!212 &1662696158

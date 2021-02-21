@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MilkGame.unity
     guid: 528a571ce7e62924ca14912241408e98
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: e09f3171625369848b5cfd6d7ddd8498
   m_configObjects: {}

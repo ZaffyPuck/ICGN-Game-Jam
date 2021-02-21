@@ -13458,8 +13458,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2140944349
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1be46898c5995004fb1f1d04b551c837, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -13480,8 +13480,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087687961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.14, y: 0.386, z: 0}
-  m_LocalScale: {x: 21.658686, y: 25.130325, z: 21.658686}
+  m_LocalPosition: {x: 10.14, y: 1.084, z: 0}
+  m_LocalScale: {x: 21.658686, y: 23.73489, z: 21.658686}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -13878,7 +13878,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 42.660908
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -14247,6 +14247,17 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1765138755}
           m_ObjectArgumentAssemblyTypeName: MiniGameDialogue, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2132832494}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
