@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     // public GameManager gm; Thought I would need it for GameState
+    private void Start()
+    {
+        GlobalControl.Instance.AtMainMenu = true;
+    }
 
     /// <summary>
     /// Plays the Game by loading game scene

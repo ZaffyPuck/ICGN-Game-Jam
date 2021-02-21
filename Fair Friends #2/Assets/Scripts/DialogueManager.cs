@@ -8,14 +8,23 @@ public class DialogueManager : MonoBehaviour
 {
     // Fields
     private Queue<string> sentences;
+    public GameObject IntroDialogue;
+    public TMP_Text IntroButtonText;
+    public AudioSource popUpSound;
+    public AudioSource clickSound;
 
-    void Start()
+    void Awake()
     {
         sentences = new Queue<string>();
+        if (IntroDialogue && GlobalControl.Instance.AtMainMenu)
+        {
+            IntroDialogue.SetActive(true);
+        }
     }
 
     public void StartDialogue(NPC npc)
     {
+        popUpSound.Play();
         Debug.Log("Starting conversation with " + npc.name);
         TextMeshPro nameText = npc.nameText;
         TextMeshPro dialogueText = npc.dialogueText;
@@ -60,6 +69,7 @@ public class DialogueManager : MonoBehaviour
     // For MiniGames
     public void StartDialogue(MiniGameDialogue mgD)
     {
+        popUpSound.Play();
         Debug.Log("Starting conversation with " + mgD.name);
         TextMeshPro nameText = mgD.nameText;
         TextMeshPro dialogueText = mgD.dialogueText;
@@ -92,6 +102,51 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             mgD.dialogueText.text += letter;
+            yield return wait;
+        }
+    }
+
+    // For Player
+    public void StartDialogue(PlayerDialogue pd)
+    {
+        clickSound.Play();
+        TextMeshPro dialogueText = pd.playerDialogueText;
+
+        sentences.Clear();
+
+        foreach (string sentence in pd.dialogue.sentences)
+        {
+            sentences.Enqueue(sentence);
+        }
+        DisplayNextSentence(pd);
+    }
+    public void DisplayNextSentence(PlayerDialogue pd)
+    {
+        Debug.Log("Clicked");
+        if (sentences.Count == 1)
+        {
+            //change button to say play
+            IntroButtonText.text = "Play";
+        }
+        else if (sentences.Count == 0)
+        {
+            //close dialogue window
+            IntroDialogue.SetActive(false);
+            return;
+        }
+
+        string sentence = sentences.Dequeue();
+        //dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence, pd));
+    }
+    IEnumerator TypeSentence(string sentence, PlayerDialogue pd)
+    {
+        WaitForSeconds wait = new WaitForSeconds(1 / 60f);
+        pd.playerDialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            pd.playerDialogueText.text += letter;
             yield return wait;
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         npcVisability.SetActive(true);
         standVisability.SetActive(true);
+        if(GlobalControl.Instance.AtMainMenu)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(player.GetComponent<PlayerDialogue>());
+        }
+        
     }
 
     void Update()

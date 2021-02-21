@@ -20,9 +20,12 @@ public class MatchingGameManager : MonoBehaviour
     private int gameGuesses;
     private string firstGuessPuzzle, secondGuessPuzzle;
     private int firstGuessIndex, secondGuessIndex;
+    public AudioSource matchSound;
+    public AudioSource click;
 
     private void Awake()
     {
+        GlobalControl.Instance.AtMainMenu = false;
         puzzles = Resources.LoadAll<Sprite>("Sprites");
         winScreen.SetActive(false);
     }
@@ -102,6 +105,7 @@ public class MatchingGameManager : MonoBehaviour
 
         if (firstGuessPuzzle == secondGuessPuzzle)
         {
+            matchSound.Play();
             yield return new WaitForSeconds(.5f);
 
             buttons[firstGuessIndex].interactable = false;
@@ -131,6 +135,7 @@ public class MatchingGameManager : MonoBehaviour
 
         if(numCorrectGuesses == gameGuesses)
         {
+            click.Play();
             winScreen.SetActive(true);
             GlobalControl.Instance.Followers++;
         }

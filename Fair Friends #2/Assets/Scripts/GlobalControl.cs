@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GlobalControl : MonoBehaviour
 {
+    private bool atMainMenu;
     public static GlobalControl Instance;
     private int followers = 0;
     private Vector3 playerPosition;
@@ -30,6 +31,17 @@ public class GlobalControl : MonoBehaviour
             playerPosition = value;
         }
     }
+    public bool AtMainMenu
+    {
+        get
+        {
+            return atMainMenu;
+        }
+        set
+        {
+            atMainMenu = value;
+        }
+    }
 
     void Awake()
     {
@@ -41,6 +53,14 @@ public class GlobalControl : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if(followers >=3 )
+        {
+            // Make win page active
         }
     }
 }

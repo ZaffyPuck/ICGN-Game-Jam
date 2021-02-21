@@ -13,6 +13,7 @@ public class JellyBeanGameManager : MonoBehaviour
 
     private void Awake()
     {
+        GlobalControl.Instance.AtMainMenu = false;
         input = GameObject.Find("InputField").GetComponent<TMP_InputField>();
     }
     private void Start()

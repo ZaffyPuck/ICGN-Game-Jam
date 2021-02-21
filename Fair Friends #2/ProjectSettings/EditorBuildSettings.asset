@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/FairGrounds.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/jellyBeanGame.unity
+    path: Assets/Scenes/JellyBeanGame.unity
     guid: 2c32fceb3f75a484bb94288a05d6ee34
+  - enabled: 1
+    path: Assets/Scenes/MatchingGame.unity
+    guid: 65e0c0d9030d70e48b4da0c6a6183543
+  - enabled: 1
+    path: Assets/Scenes/MilkGame.unity
+    guid: 528a571ce7e62924ca14912241408e98
   m_configObjects: {}
