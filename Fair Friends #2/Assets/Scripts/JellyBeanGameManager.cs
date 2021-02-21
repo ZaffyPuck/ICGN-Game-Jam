@@ -61,8 +61,7 @@ public class JellyBeanGameManager : MonoBehaviour
         }
         else
         {
-            input.text = ""; // reset input
-            mgD.dialogue.sentences[0] = "Please input a numer between 1 and 20!";
+            input.text = ""; // reset input            mgD.dialogue.sentences[0] = "Please input a numer between 1 and 20!";
         }
 
         // Feedback
